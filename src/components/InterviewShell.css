@@ -1,0 +1,109 @@
+.interview-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #292929;
+  position: relative;
+}
+
+/* Removed timer-related overlay */
+
+/* Keep header and its contents above the overlay */
+.shell-header {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  background: #2a2a2a;
+  border-bottom: 1px solid #404040;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Removed timer spotlight effect */
+
+/* Instructions button inherits from shared styles */
+
+/* Back button positioning handled by layout */
+
+.pattern-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  justify-content: center;
+}
+
+.pattern-info h2 {
+  color: #e2e8f0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.pattern-version {
+  background: #505050;
+  color: #e2e8f0;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Removed pulse animation for timer */
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+/* Instructions button style overrides */
+.instructions-button.viewed {
+  background: #505050 !important;
+  color: #e2e8f0 !important;
+}
+
+.shell-main {
+  flex: 1;
+  overflow: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .shell-header {
+    padding: 12px 16px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .pattern-info {
+    order: -1;
+    width: 100%;
+    justify-content: flex-start;
+    margin-bottom: 8px;
+  }
+
+  .pattern-info h2 {
+    font-size: 1.25rem;
+  }
+
+  .header-actions {
+    margin-left: auto;
+  }
+
+  .instructions-button {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+}

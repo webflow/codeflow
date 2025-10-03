@@ -1,0 +1,210 @@
+@import "./globals.css";
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+      "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+      "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* background-color: #292929; */
+    /* color: #e2e8f0; */
+    /* line-height: 1.6; */
+  }
+
+  code {
+    font-family: "Monaco", "Menlo", "Ubuntu Mono", "Consolas", "source-code-pro",
+      monospace;
+    /* background-color: #505050; */
+    /* color: #e2e8f0; */
+    /* padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em; */
+  }
+
+  #root {
+    /* min-height: 100vh; */
+    /* position: relative; */
+  }
+
+  /* Add floating animation for some visual interest */
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .floating-element {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #e2e8f0;
+    border-top: 4px solid #4299e1;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 16px;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* =================================
+   SHARED BUTTON SYSTEM
+   ================================= */
+
+  /* Base button styles */
+  .btn {
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-decoration: none;
+    font-family: inherit;
+    white-space: nowrap;
+  }
+
+  .btn:focus {
+    outline: 2px solid rgba(102, 126, 234, 0.4);
+    outline-offset: 2px;
+  }
+
+  /* Button sizes */
+  .btn-sm {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+
+  .btn-md {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+
+  .btn-lg {
+    padding: 12px 20px;
+    font-size: 0.95rem;
+  }
+
+  /* Primary button - main actions */
+  .btn-primary {
+    background-color: #4353ff;
+    color: white;
+    border: none;
+  }
+
+  .btn-primary:hover {
+    background-color: #3644d8;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(67, 83, 255, 0.3);
+  }
+
+  .btn-primary:active {
+    transform: translateY(0);
+  }
+
+  /* Secondary button - less prominent actions */
+  .btn-secondary {
+    background: #f7fafc;
+    color: #4a5568;
+    border: 1px solid #e2e8f0;
+  }
+
+  .btn-secondary:hover {
+    background: #edf2f7;
+    color: #2d3748;
+  }
+
+  /* Danger button - destructive actions */
+  .btn-danger {
+    background: #fff5f5;
+    color: #e53e3e;
+    border: 1px solid #fed7d7;
+  }
+
+  .btn-danger:hover {
+    background: #fed7d7;
+    transform: translateY(-1px);
+  }
+
+  .btn-danger:active {
+    transform: translateY(0);
+  }
+
+  /* Ghost button - transparent with accent */
+  .btn-ghost {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+  }
+
+  .btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+  }
+
+  .btn-ghost:active {
+    transform: translateY(0);
+  }
+
+  /* Round button - for close/icon buttons */
+  .btn-round {
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+  }
+
+  .btn-round.btn-sm {
+    width: 32px;
+    height: 32px;
+  }
+
+  /* Tab button - for navigation tabs */
+  .btn-tab {
+    background: none;
+    border: none;
+    padding: 12px 20px;
+    color: #718096;
+    font-weight: 500;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+    border-radius: 0;
+  }
+
+  .btn-tab:hover {
+    color: #4a5568;
+    background: rgba(0, 0, 0, 0.02);
+  }
+
+  .btn-tab.active {
+    color: #667eea;
+    border-bottom-color: #667eea;
+    background: white;
+  }
+}

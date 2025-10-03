@@ -1,0 +1,284 @@
+/* Code Review Interface Styles */
+.code-review-interface {
+  padding: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  color: #2d3748;
+}
+
+/* Welcome Section */
+.welcome-section {
+  margin-bottom: 40px;
+}
+
+.welcome-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.welcome-header h1 {
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin: 0 0 15px 0;
+  color: #2d3748;
+}
+
+.exercise-subtitle {
+  font-size: 1.2rem;
+  color: #718096;
+  margin: 0;
+}
+
+.live-interview-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+}
+
+.notice-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.notice-content h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.notice-content p {
+  margin: 0;
+  font-size: 1rem;
+  opacity: 0.95;
+}
+
+/* File Explorer */
+.file-explorer {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.file-explorer h3 {
+  margin: 0 0 15px 0;
+  color: #2d3748;
+  font-size: 1.4rem;
+}
+
+.file-explorer-hint {
+  color: #718096;
+  margin: 0 0 25px 0;
+}
+
+.file-tree {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.file-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s ease;
+}
+
+.file-item:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e0;
+}
+
+.file-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.file-item code {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #667eea;
+  background: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.file-description {
+  color: #718096;
+  font-size: 0.9rem;
+  margin-left: auto;
+}
+
+/* Review Guidance */
+.review-guidance {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.review-guidance h3 {
+  margin: 0 0 25px 0;
+  color: #2d3748;
+  font-size: 1.4rem;
+}
+
+.focus-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.focus-item {
+  padding: 20px;
+  border-radius: 8px;
+  border-left: 4px solid;
+  background: #f8f9fa;
+}
+
+.focus-item h4 {
+  margin: 0 0 10px 0;
+  font-size: 1.1rem;
+  color: #2d3748;
+}
+
+.focus-item p {
+  margin: 0;
+  color: #718096;
+  font-size: 0.95rem;
+}
+
+.focus-item.bugs {
+  border-left-color: #f56565;
+  background: #fed7d7;
+}
+
+.focus-item.security {
+  border-left-color: #ed8936;
+  background: #feebc8;
+}
+
+.focus-item.performance {
+  border-left-color: #38a169;
+  background: #c6f6d5;
+}
+
+.focus-item.ux {
+  border-left-color: #9f7aea;
+  background: #e9d8fd;
+}
+
+/* Interview Tips */
+.interview-tips {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.interview-tips h3 {
+  margin: 0 0 20px 0;
+  color: #2d3748;
+  font-size: 1.4rem;
+}
+
+.interview-tips ul {
+  margin: 0;
+  padding-left: 20px;
+  list-style: none;
+}
+
+.interview-tips li {
+  margin-bottom: 12px;
+  padding-left: 25px;
+  position: relative;
+  color: #4a5568;
+}
+
+.interview-tips li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #38a169;
+  font-weight: bold;
+}
+
+.interview-tips strong {
+  color: #2d3748;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .code-review-interface {
+    padding: 20px;
+  }
+
+  .welcome-header h1 {
+    font-size: 2rem;
+  }
+
+  .live-interview-notice {
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+  }
+
+  .notice-icon {
+    text-align: center;
+  }
+
+  .file-explorer,
+  .review-guidance,
+  .interview-tips {
+    padding: 20px;
+  }
+
+  .focus-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .file-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .file-description {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .code-review-interface {
+    padding: 15px;
+  }
+
+  .welcome-header h1 {
+    font-size: 1.75rem;
+  }
+
+  .file-explorer,
+  .review-guidance,
+  .interview-tips {
+    padding: 15px;
+  }
+}
