@@ -1,8 +1,14 @@
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./webflow.svg">
+    <img alt="Webflow" src="./webflow.svg" width="300">
+  </picture>
+</div>
+
 # Codeflow
 
 A specialized coding interview environment designed for structured technical assessments.
 
----
 
 ## 🎯 For Interview Candidates
 
