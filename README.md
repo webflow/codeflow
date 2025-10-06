@@ -45,6 +45,25 @@ Your interviewer will provide you with a `.zip` file containing the coding chall
 3. The challenge will **automatically appear** in the interface
 4. **Click on the pattern** to begin coding
 
+#### Interface Features
+- **Clean Design** - Focus on your code without distractions
+- **Instructions** - Access requirements and tips anytime
+- **Responsive** - Works great on any screen size
+
+#### Your Workflow
+1. Review the requirements in the Instructions panel
+2. Implement your solution in the provided React component
+3. Test your work as you go
+4. Ask questions if you need clarification
+
+
+#### Tips for Success
+- **Read all instructions carefully** before starting
+- **Ask questions** if requirements are unclear
+- **Focus on clean, readable code** over complex solutions
+- **Test your implementation** as you build
+- **Think about user experience** and edge cases
+
 **Good luck with your interview!** 🚀
 
 ---
@@ -60,12 +79,6 @@ Codeflow is a React-based interview platform that provides:
 - Support for multiple interview patterns and challenges
 - Extensible architecture for custom interview formats
 
-### Tech Stack
-
-- **Frontend**: React 18, TypeScript
-- **Styling**: TailwindCSS, shadcn/ui components
-- **Build**: Create React App with Craco
-- **Code Editor**: Monaco Editor (VSCode's editor)
 
 ### Project Structure
 
@@ -73,7 +86,7 @@ Codeflow is a React-based interview platform that provides:
 codeflow/
 ├── src/
 │   ├── components/       # UI components
-│   ├── interviews/      # Interview patterns & challenges
+│   ├── interviews/      # Interview patterns & challenges. This directory should NOT contain interviews at the repository level.
 │   ├── hooks/          # Custom React hooks
 │   └── lib/            # Utility functions
 ├── public/             # Static assets
@@ -99,7 +112,7 @@ npm run build
 
 ### Creating Interview Patterns
 
-Interview patterns are modular challenges that can be loaded dynamically. See `src/interviews/README.md` for pattern documentation.
+Interview patterns are modular challenges that can be loaded dynamically. See [src/interviews/README.md](./src/interviews/README.md) for detailed pattern creation guidelines.
 
 ### Contributing
 
@@ -115,7 +128,6 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](./LICE
 
 - [Interview Pattern Documentation](./src/interviews/README.md)
 - [Contributing Guidelines](./CONTRIBUTING.md)
-- [System Architecture](./INTERVIEW_SYSTEM.md)
 
 ## 🤝 Support
 
