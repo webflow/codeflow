@@ -21,18 +21,40 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 interface InstructionsProps {
   readmes: ReadmeFile[];
   onClose: () => void;
+  interviewId?: string;
 }
 
-const Instructions: React.FC<InstructionsProps> = ({ readmes, onClose }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+const STORAGE_KEY_PREFIX = "instructions-page-";
+
+const Instructions: React.FC<InstructionsProps> = ({ readmes, onClose, interviewId }) => {
+  // Initialize from localStorage if we have an interviewId
+  const [currentIndex, setCurrentIndex] = useState(() => {
+    if (interviewId) {
+      const saved = localStorage.getItem(`${STORAGE_KEY_PREFIX}${interviewId}`);
+      if (saved !== null) {
+        const parsed = parseInt(saved, 10);
+        // Validate the saved index is within bounds
+        if (!isNaN(parsed) && parsed >= 0 && parsed < readmes.length) {
+          return parsed;
+        }
+      }
+    }
+    return 0;
+  });
   const [visibleTabs, setVisibleTabs] = useState<number[]>([]);
   const [overflowTabs, setOverflowTabs] = useState<number[]>([]);
   const [showTopShadow, setShowTopShadow] = useState(false);
   const [showBottomShadow, setShowBottomShadow] = useState(false);
   const tabsListRef = useRef<HTMLDivElement>(null);
-  const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   const currentReadme = readmes[currentIndex];
+
+  // Persist current page to localStorage
+  useEffect(() => {
+    if (interviewId) {
+      localStorage.setItem(`${STORAGE_KEY_PREFIX}${interviewId}`, currentIndex.toString());
+    }
+  }, [currentIndex, interviewId]);
 
   // Focus management for modal
   useEffect(() => {
@@ -274,6 +296,7 @@ const Instructions: React.FC<InstructionsProps> = ({ readmes, onClose }) => {
       .replace(/^### (.*$)/gim, "<h3>$1</h3>")
       .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
       .replace(/\*(.*?)\*/g, "<em>$1</em>")
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
       .replace(/\n\n/g, "</p><p>");
 
     // Restore inline code
@@ -352,7 +375,6 @@ const Instructions: React.FC<InstructionsProps> = ({ readmes, onClose }) => {
 
             <ScrollArea
               className="h-full"
-              ref={scrollAreaRef}
               onScrollCapture={handleScroll}
             >
               <main className="px-8 py-2">
