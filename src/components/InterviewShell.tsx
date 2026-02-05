@@ -61,7 +61,7 @@ const ResizableSidebarContent: React.FC<{
       <Sidebar variant="inset" collapsible="offcanvas">
         <SidebarContent className="overflow-hidden">
           {pattern.readmes ? (
-            <Instructions readmes={pattern.readmes} onClose={() => {}} />
+            <Instructions readmes={pattern.readmes} onClose={() => {}} interviewId={pattern.id} />
           ) : null}
         </SidebarContent>
       </Sidebar>
@@ -85,6 +85,7 @@ const ResizableSidebarContent: React.FC<{
               key={`instructions-${sidebarWidth}`}
               readmes={pattern.readmes}
               onClose={() => {}}
+              interviewId={pattern.id}
             />
           ) : null}
         </SidebarContent>
@@ -102,6 +103,8 @@ const ResizableSidebarContent: React.FC<{
   );
 };
 
+const SIDEBAR_OPEN_KEY_PREFIX = "sidebar-open-";
+
 const InterviewShell: React.FC<InterviewShellProps> = ({ pattern, onBack }) => {
   const [showInstructions, setShowInstructions] = useState(false);
   const [hasViewedInstructions, setHasViewedInstructions] = useState(false);
@@ -109,6 +112,18 @@ const InterviewShell: React.FC<InterviewShellProps> = ({ pattern, onBack }) => {
   const [isDragging, setIsDragging] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
   const isResizing = useRef(false);
+
+  // Sidebar open state persisted to localStorage
+  const [sidebarOpen, setSidebarOpen] = useState(() => {
+    const saved = localStorage.getItem(`${SIDEBAR_OPEN_KEY_PREFIX}${pattern.id}`);
+    // Default to open (true) if no saved state
+    return saved === null ? true : saved === "true";
+  });
+
+  const handleSidebarOpenChange = (open: boolean) => {
+    setSidebarOpen(open);
+    localStorage.setItem(`${SIDEBAR_OPEN_KEY_PREFIX}${pattern.id}`, String(open));
+  };
 
   // Resize functionality
   useEffect(() => {
@@ -194,7 +209,7 @@ const InterviewShell: React.FC<InterviewShellProps> = ({ pattern, onBack }) => {
         </div>
       </header>
       <div className="flex-1 overflow-y-auto flex flex-col relative">
-        <SidebarProvider>
+        <SidebarProvider open={sidebarOpen} onOpenChange={handleSidebarOpenChange}>
           <ResizableSidebarContent
             pattern={pattern}
             sidebarWidth={sidebarWidth}
@@ -241,6 +256,7 @@ const InterviewShell: React.FC<InterviewShellProps> = ({ pattern, onBack }) => {
                 <Instructions
                   readmes={pattern.readmes}
                   onClose={() => setShowInstructions(false)}
+                  interviewId={pattern.id}
                 />
               ) : isCodingChallenge ? (
                 <CodingChallengeWrapper pattern={pattern} />

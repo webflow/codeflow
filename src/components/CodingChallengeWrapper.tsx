@@ -28,6 +28,7 @@ const CodingChallengeWrapper: React.FC<CodingChallengeWrapperProps> = ({ pattern
         <Instructions
           readmes={pattern.readmes}
           onClose={handleInstructionsClose}
+          interviewId={pattern.id}
         />
       ) : (
         <div className="challenge-content">
