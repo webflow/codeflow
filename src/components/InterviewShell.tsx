@@ -35,6 +35,7 @@ interface InterviewShellProps {
 const ResizableSidebarContent: React.FC<{
   pattern: InterviewPattern;
   sidebarWidth: number;
+  fullWidth?: boolean;
   setSidebarWidth: (width: number) => void;
   isDragging: boolean;
   setIsDragging: (dragging: boolean) => void;
@@ -42,12 +43,30 @@ const ResizableSidebarContent: React.FC<{
 }> = ({
   pattern,
   sidebarWidth,
+  fullWidth = false,
   setSidebarWidth,
   isDragging,
   setIsDragging,
   handleResizeStart,
 }) => {
   const { open } = useSidebar();
+
+  if (fullWidth) {
+    return (
+      <div
+        className="relative h-full w-full max-w-4xl mx-auto"
+        style={{ "--sidebar-width": "100%" } as React.CSSProperties}
+      >
+        <Sidebar variant="inset" collapsible="none">
+          <SidebarContent className="overflow-hidden">
+            {pattern.readmes ? (
+              <Instructions readmes={pattern.readmes} onClose={() => {}} interviewId={pattern.id} />
+            ) : null}
+          </SidebarContent>
+        </Sidebar>
+      </div>
+    );
+  }
 
   // Don't show resize handle or apply custom width when sidebar is collapsed
   if (!open) {
@@ -189,6 +208,10 @@ const InterviewShell: React.FC<InterviewShellProps> = ({ pattern, onBack }) => {
   const PatternComponent = pattern.component;
   const isCodingChallenge = pattern.type === "coding-challenge";
   const isCodeReview = pattern.type === "code-review";
+  const hasPreview = isCodingChallenge
+    ? Boolean(pattern.implementationDetails)
+    : isCodeReview || Boolean(PatternComponent);
+  const isInstructionsOnly = Boolean(pattern.readmes?.length) && !hasPreview;
 
   return (
     <div
@@ -212,73 +235,79 @@ const InterviewShell: React.FC<InterviewShellProps> = ({ pattern, onBack }) => {
         </div>
       </header>
       <div className="flex-1 overflow-y-auto flex flex-col relative">
-        <SidebarProvider open={sidebarOpen} onOpenChange={handleSidebarOpenChange}>
+        <SidebarProvider
+          open={isInstructionsOnly || sidebarOpen}
+          onOpenChange={isInstructionsOnly ? () => {} : handleSidebarOpenChange}
+        >
           <ResizableSidebarContent
             pattern={pattern}
             sidebarWidth={sidebarWidth}
+            fullWidth={isInstructionsOnly}
             setSidebarWidth={setSidebarWidth}
             isDragging={isDragging}
             setIsDragging={setIsDragging}
             handleResizeStart={handleResizeStart}
           />
-          <SidebarInset className="flex-1 relative border flex overflow-hidden m-2 rounded-xl">
-            <header className="h-12 flex justify-between px-4 border-b relative">
-              <div className="flex items-center gap-4">
-                <SidebarTrigger />
-                <Separator
-                  orientation="vertical"
-                  className="data-[orientation=vertical]:h-4 bg-border"
-                />
-                <Breadcrumb>
-                  <BreadcrumbList>
-                    <BreadcrumbItem>
-                      <BreadcrumbLink asChild>
-                        <Button variant="ghost" size="sm" onClick={handleExit}>
-                          Home
-                        </Button>
-                      </BreadcrumbLink>
-                    </BreadcrumbItem>
-                    <BreadcrumbSeparator />
-                    <BreadcrumbItem>
-                      <BreadcrumbPage className="flex items-center gap-2 font-medium px-2">
-                        {pattern.name}
-                        <Badge
-                          variant="outline"
-                          className="px-1 text-muted-foreground"
-                        >
-                          v{pattern.version}
-                        </Badge>
-                      </BreadcrumbPage>
-                    </BreadcrumbItem>
-                  </BreadcrumbList>
-                </Breadcrumb>
-              </div>
-            </header>
-            <main className="bg-white flex-1 overflow-y-auto">
-              {!serverReady ? (
-                <div className="flex items-center justify-center h-full text-muted-foreground">
-                  Starting server...
+          {!isInstructionsOnly && (
+            <SidebarInset className="flex-1 relative border flex overflow-hidden m-2 rounded-xl">
+              <header className="h-12 flex justify-between px-4 border-b relative">
+                <div className="flex items-center gap-4">
+                  <SidebarTrigger />
+                  <Separator
+                    orientation="vertical"
+                    className="data-[orientation=vertical]:h-4 bg-border"
+                  />
+                  <Breadcrumb>
+                    <BreadcrumbList>
+                      <BreadcrumbItem>
+                        <BreadcrumbLink asChild>
+                          <Button variant="ghost" size="sm" onClick={handleExit}>
+                            Home
+                          </Button>
+                        </BreadcrumbLink>
+                      </BreadcrumbItem>
+                      <BreadcrumbSeparator />
+                      <BreadcrumbItem>
+                        <BreadcrumbPage className="flex items-center gap-2 font-medium px-2">
+                          {pattern.name}
+                          <Badge
+                            variant="outline"
+                            className="px-1 text-muted-foreground"
+                          >
+                            v{pattern.version}
+                          </Badge>
+                        </BreadcrumbPage>
+                      </BreadcrumbItem>
+                    </BreadcrumbList>
+                  </Breadcrumb>
                 </div>
-              ) : showInstructions && pattern.readmes ? (
-                <Instructions
-                  readmes={pattern.readmes}
-                  onClose={() => setShowInstructions(false)}
-                  interviewId={pattern.id}
-                />
-              ) : isCodingChallenge ? (
-                <CodingChallengeWrapper pattern={pattern} />
-              ) : isCodeReview ? (
-                <CodeReviewInterface pattern={pattern} />
-              ) : PatternComponent ? (
-                <PatternComponent />
-              ) : (
-                <div className="pattern-error">
-                  <h3>Pattern Error</h3>
-                  <p>No component found for this interview pattern.</p>
-                </div>
-              )}
-            </main>
-          </SidebarInset>
+              </header>
+              <main className="bg-white flex-1 overflow-y-auto">
+                {!serverReady ? (
+                  <div className="flex items-center justify-center h-full text-muted-foreground">
+                    Starting server...
+                  </div>
+                ) : showInstructions && pattern.readmes ? (
+                  <Instructions
+                    readmes={pattern.readmes}
+                    onClose={() => setShowInstructions(false)}
+                    interviewId={pattern.id}
+                  />
+                ) : isCodingChallenge ? (
+                  <CodingChallengeWrapper pattern={pattern} />
+                ) : isCodeReview ? (
+                  <CodeReviewInterface pattern={pattern} />
+                ) : PatternComponent ? (
+                  <PatternComponent />
+                ) : (
+                  <div className="pattern-error">
+                    <h3>Pattern Error</h3>
+                    <p>No component found for this interview pattern.</p>
+                  </div>
+                )}
+              </main>
+            </SidebarInset>
+          )}
         </SidebarProvider>
       </div>
     </div>

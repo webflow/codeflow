@@ -210,24 +210,16 @@
 }
 
 .markdown-content code {
-  background: #505050;
-  color: #e2e8f0;
+  background: #f1f5f9;
+  color: #475569;
   padding: 2px 6px;
   border-radius: 4px;
   font-family: "Monaco", "Menlo", "Consolas", "Courier New", monospace;
   font-size: 0.85em;
-  border: 1px solid #606060;
+  border: 1px solid #cbd5e1;
   font-weight: 500;
 }
 
-/* Better contrast for light mode */
-:root .markdown-content code {
-  background: #f1f5f9;
-  color: #475569;
-  border: 1px solid #cbd5e1;
-}
-
-/* Ensure good contrast for dark mode */
 .dark .markdown-content code {
   background: #4a5568;
   color: #f7fafc;
@@ -235,17 +227,23 @@
 }
 
 .markdown-content pre {
-  background: #1a202c;
-  /* color: #e2e8f0; */
+  background: #f8fafc;
+  color: #1e293b;
   padding: 16px;
   border-radius: 8px;
   overflow-x: auto;
   margin: 16px 0;
-  border: 1px solid #2d3748;
+  border: 1px solid #cbd5e1;
   white-space: pre;
   font-family: "Monaco", "Menlo", "Consolas", "Courier New", monospace;
   font-size: 0.85rem;
   line-height: 1.4;
+}
+
+.dark .markdown-content pre {
+  background: #1a202c;
+  color: #e2e8f0;
+  border: 1px solid #2d3748;
 }
 
 .markdown-content pre code {
