@@ -111,6 +111,21 @@ npm start
 npm run build
 ```
 
+### Testing the Environment with Examples
+
+To quickly test if the environment is set up correctly and see how challenges are loaded, you can use the provided example challenge:
+
+```bash
+# Copy the example challenge into the interviews directory
+cp -r examples/prop-drilling src/interviews/
+
+# Ensure your development server is running
+npm start
+```
+
+The **Context API Refactor** challenge should now automatically appear on the main interface at `http://localhost:8080`.
+
+
 ### Creating Interview Patterns
 
 Interview patterns are modular challenges that can be loaded dynamically. See [src/interviews/README.md](./src/interviews/README.md) for detailed pattern creation guidelines.
