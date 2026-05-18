@@ -108,8 +108,8 @@ dist/
 logs
 *.log
 
-# Interview system - prevent new subdirectories in src/interviews
-src/interviews/*/
+# Interview system - prevent new subdirectories in src/interviews and symlinks
+src/interviews/*
 # But allow existing files
 !src/interviews/README.md
 !src/interviews/types.ts

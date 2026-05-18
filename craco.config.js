@@ -10,5 +10,13 @@ module.exports = {
     alias: {
       "@": path.resolve(__dirname, "src"),
     },
+    configure: (webpackConfig) => {
+      webpackConfig.resolve.symlinks = false;
+      webpackConfig.watchOptions = {
+        ...webpackConfig.watchOptions,
+        followSymlinks: true,
+      };
+      return webpackConfig;
+    },
   },
 };
