@@ -317,7 +317,7 @@ const Instructions: React.FC<InstructionsProps> = ({ readmes, onClose, interview
   };
 
   return (
-    <div className="flex flex-col h-full overflow-hidden pt-2">
+    <div className="flex flex-col h-full overflow-hidden">
       {/* <header className="flex items-center gap-2 p-4">
         <BookOpenIcon className="w-4 h-4" />
         <h2 className="text-xl font-bold">Instructions</h2>
@@ -328,7 +328,7 @@ const Instructions: React.FC<InstructionsProps> = ({ readmes, onClose, interview
         onValueChange={(value) => goToPage(parseInt(value))}
         className="flex-1 overflow-y-auto"
       >
-        <div ref={tabsListRef} className="flex items-center gap-1">
+        <div ref={tabsListRef} className="flex items-center gap-1 px-4 pt-4 pb-3 border-b">
           <TabsList className="flex-shrink-0">
             {visibleTabs.map((index) => (
               <TabsTrigger key={index} value={index.toString()}>
@@ -377,7 +377,7 @@ const Instructions: React.FC<InstructionsProps> = ({ readmes, onClose, interview
               className="h-full"
               onScrollCapture={handleScroll}
             >
-              <main className="px-8 py-2">
+              <main className="px-8 py-6">
                 <div className="markdown-content">
                   <div
                     dangerouslySetInnerHTML={{

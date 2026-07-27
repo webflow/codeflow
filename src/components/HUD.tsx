@@ -66,7 +66,7 @@ const HUD: React.FC<HUDProps> = ({ onLaunchPattern }) => {
       </header>
 
       <div className="flex-1 overflow-y-auto flex flex-col">
-        <main className="flex-1 py-20 bg-accent" id="main-content">
+        <main className="flex-1 py-20 px-6 sm:px-8 lg:px-12 bg-accent" id="main-content">
           <div className="flex flex-col gap-24 max-w-7xl mx-auto">
             <section className="flex flex-col gap-8">
               <div className="flex flex-col gap-8 max-w-3xl">
@@ -85,7 +85,7 @@ const HUD: React.FC<HUDProps> = ({ onLaunchPattern }) => {
                   </p>
                 </div>
               </div>
-              <div className="flex gap-8">
+              <div className="flex flex-col md:flex-row gap-8">
                 <Card className="flex-1">
                   <CardHeader>
                     <h3 className="text-xl font-bold">

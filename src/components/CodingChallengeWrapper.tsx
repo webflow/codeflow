@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { InterviewPattern } from '../interviews/types';
 import Instructions from './Instructions';
+import TerminalPreview from './TerminalPreview';
 import './CodingChallengeWrapper.css';
 
 interface CodingChallengeWrapperProps {
@@ -8,7 +9,10 @@ interface CodingChallengeWrapperProps {
 }
 
 const CodingChallengeWrapper: React.FC<CodingChallengeWrapperProps> = ({ pattern }) => {
-  const [showInstructions, setShowInstructions] = useState(true);
+  const hasTerminal = Boolean(pattern.terminalWorkspace);
+  // The left sidebar already shows the full readmes permanently, so patterns with a
+  // terminal skip this internal duplicate and go straight to the terminal.
+  const [showInstructions, setShowInstructions] = useState(!hasTerminal);
   const [hasViewedInstructions, setHasViewedInstructions] = useState(false);
 
   const handleInstructionsClose = () => {
@@ -30,6 +34,17 @@ const CodingChallengeWrapper: React.FC<CodingChallengeWrapperProps> = ({ pattern
           onClose={handleInstructionsClose}
           interviewId={pattern.id}
         />
+      ) : hasTerminal ? (
+        <div className="challenge-content">
+          <div className="challenge-tabs">
+            <span className="challenge-tab-hint">
+              Write your solution in your own editor, then run these from your own terminal to check it.
+            </span>
+          </div>
+          <div className="problem-container terminal-container">
+            <TerminalPreview workspace={pattern.terminalWorkspace!} />
+          </div>
+        </div>
       ) : (
         <div className="challenge-content">
           <div className="problem-container">
@@ -56,7 +71,7 @@ const CodingChallengeWrapper: React.FC<CodingChallengeWrapperProps> = ({ pattern
                   <h3>🎯 Interview Focus</h3>
                   <p><strong>Quality over Speed:</strong> Demonstrate your problem-solving approach, code organization, and thoughtful use of tools. It's better to implement fewer features well than to rush through everything.</p>
                 </div>
-                
+
                 <div className="implementation-steps">
                   <h3>Quick Start</h3>
                   <ol>

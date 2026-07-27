@@ -24,6 +24,21 @@
   border: 1px solid #3c3c3c;
 }
 
+.problem-container.terminal-container {
+  padding: 0;
+}
+
+.challenge-tabs {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.challenge-tab-hint {
+  font-size: 12px;
+  color: #8a8a8a;
+}
+
 .problem-header {
   display: flex;
   justify-content: space-between;
