@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TerminalWorkspace } from '@/interviews/types';
+import { TerminalCommand, TerminalWorkspace } from '@/interviews/types';
 import './TerminalPreview.css';
 
 interface TerminalPreviewProps {
@@ -8,7 +8,7 @@ interface TerminalPreviewProps {
 
 interface CommandLineProps {
   command: string;
-  caption: string;
+  caption?: string;
 }
 
 const CommandLine: React.FC<CommandLineProps> = ({ command, caption }) => {
@@ -29,12 +29,15 @@ const CommandLine: React.FC<CommandLineProps> = ({ command, caption }) => {
           {copied ? 'Copied' : 'Copy'}
         </button>
       </div>
-      <p className="terminal-preview-caption">{caption}</p>
+      {caption && <p className="terminal-preview-caption">{caption}</p>}
     </div>
   );
 };
 
 const TerminalPreview: React.FC<TerminalPreviewProps> = ({ workspace }) => {
+  const getCommandDetails = (command: TerminalCommand): { value: string; caption?: string } =>
+    typeof command === 'string' ? { value: command } : command;
+
   return (
     <div className="terminal-preview">
       <div className="terminal-preview-window">
@@ -42,20 +45,24 @@ const TerminalPreview: React.FC<TerminalPreviewProps> = ({ workspace }) => {
           <span className="terminal-preview-dot dot-red" />
           <span className="terminal-preview-dot dot-yellow" />
           <span className="terminal-preview-dot dot-green" />
-          <span className="terminal-preview-titletext">terminal — your starter directory</span>
+          <span className="terminal-preview-titletext">terminal — your interview directory</span>
         </div>
         <div className="terminal-preview-body">
-          <CommandLine command={workspace.runCommand} caption="Runs your solution." />
-          {workspace.testCommand && (
-            <CommandLine
-              command={workspace.testCommand}
-              caption="Runs a small sample of the checks we'll grade against — not the full suite, just enough to show you the shape of it."
-            />
-          )}
+          {workspace.commands.map((command, index) => {
+            const { value, caption } = getCommandDetails(command);
+
+            return (
+              <CommandLine
+                key={`${value}-${index}`}
+                command={value}
+                caption={caption}
+              />
+            );
+          })}
         </div>
       </div>
       <p className="terminal-preview-footnote">
-        Run these from your own terminal, in the starter directory you unzipped — this panel is just a reference, not a live shell.
+        Run these from your own terminal, in the interview directory you unzipped — this panel is just a reference, not a live shell.
       </p>
     </div>
   );

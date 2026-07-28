@@ -209,7 +209,7 @@ const InterviewShell: React.FC<InterviewShellProps> = ({ pattern, onBack }) => {
   const isCodingChallenge = pattern.type === "coding-challenge";
   const isCodeReview = pattern.type === "code-review";
   const hasPreview = isCodingChallenge
-    ? Boolean(pattern.implementationDetails)
+    ? Boolean(pattern.implementationDetails || pattern.terminalWorkspace)
     : isCodeReview || Boolean(PatternComponent);
   const isInstructionsOnly = Boolean(pattern.readmes?.length) && !hasPreview;
 

@@ -21,17 +21,10 @@ export interface ApiRoute {
   handler: (req: ApiRequest) => Promise<unknown>;
 }
 
-// A practice terminal that runs REAL shell commands in the REAL starter directory a
-// candidate already unzipped into src/interviews/<pattern.id>/ — CodeFlow never embeds
-// file content or picks a language runtime; it just shells out to whatever the problem
-// declares here, the same as if the candidate opened a real terminal themselves.
+export type TerminalCommand = string | { value: string; caption: string };
+
 export interface TerminalWorkspace {
-  // Shell command that runs the candidate's solution, e.g. "./run.sh". Every language
-  // starter is expected to ship a run.sh wrapping its own toolchain so this stays generic.
-  runCommand: string;
-  // Shell command that runs a small, intentionally-incomplete sample of the checks the
-  // solution will be judged against (not the full grading suite), e.g. "./test.sh".
-  testCommand?: string;
+  commands: TerminalCommand[];
 }
 
 export interface InterviewPattern {
