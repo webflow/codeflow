@@ -21,13 +21,13 @@ interface InterviewCardProps {
 
 const InterviewCard: React.FC<InterviewCardProps> = ({ pattern, onLaunch }) => {
   return (
-    <Card>
+    <Card className="w-full h-full">
       <CardHeader className="flex flex-col gap-2">
         <CardTitle className="text-2xl">{pattern.name}</CardTitle>
         <CardDescription>{pattern.description}</CardDescription>
       </CardHeader>
 
-      <CardContent className="flex flex-col gap-4">
+      <CardContent className="flex flex-1 flex-col gap-4">
         {pattern.tags && pattern.tags.length > 0 && (
           <div className="card-tags">
             {pattern.tags.map((tag, index) => (

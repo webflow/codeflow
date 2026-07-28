@@ -157,8 +157,19 @@
   margin-bottom: 12px;
 }
 
+/* Radix ScrollArea wraps its content in an inline-styled `display: table` div to
+   measure scroll size. That div sizes to its content's unwrapped intrinsic width
+   instead of the space actually available, so long paragraphs stop wrapping and
+   get clipped by the sidebar's `overflow: hidden` instead. Force it back to a
+   normal block box so text wraps against the real container width. */
+[data-radix-scroll-area-viewport] > div {
+  display: block !important;
+  min-width: 0 !important;
+}
+
 .markdown-content {
   line-height: 1.6;
+  overflow-wrap: break-word;
   /* color: #e2e8f0; */
 }
 

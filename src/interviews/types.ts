@@ -21,6 +21,12 @@ export interface ApiRoute {
   handler: (req: ApiRequest) => Promise<unknown>;
 }
 
+export type TerminalCommand = string | { value: string; caption: string };
+
+export interface TerminalWorkspace {
+  commands: TerminalCommand[];
+}
+
 export interface InterviewPattern {
   id: string;
   name: string;
@@ -34,6 +40,7 @@ export interface InterviewPattern {
   type?: 'react' | 'coding-challenge' | 'code-review';  // Added code-review type
   implementationDetails?: ImplementationDetails;
   routes?: ApiRoute[];
+  terminalWorkspace?: TerminalWorkspace;
 }
 
 export interface InterviewConfig {
