@@ -53,7 +53,8 @@
     "browserslist": "4.29.2",
     "electron-to-chromium": "1.5.439",
     "enhanced-resolve": "5.25.0",
-    "regexpu-core": "6.4.0"
+    "regexpu-core": "6.4.0",
+    "regenerate-unicode-properties": "10.2.0"
   },
   "browserslist": {
     "production": [
