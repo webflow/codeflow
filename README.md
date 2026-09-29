@@ -17,8 +17,8 @@ If you've received this link for a technical interview, follow these steps to se
 ### Quick Setup (<5 minutes)
 
 1. **Prerequisites**
-   - Node.js (v14 or higher) - [Download here](https://nodejs.org/)
-   - npm (v6 or higher) - comes with Node.js
+   - Node.js 18.12 or newer (Node.js 22 is recommended) - [Download here](https://nodejs.org/)
+   - npm 9 or newer - comes with supported Node.js releases
 
 2. **Installation**
    ```bash
@@ -26,7 +26,7 @@ If you've received this link for a technical interview, follow these steps to se
    # Open a terminal in the project directory
 
    # Install dependencies (this may take a minute)
-   npm install
+   npm ci
 
    # Start the development server
    npm start
@@ -102,7 +102,7 @@ git clone git@github.com:webflow/codeflow.git
 cd codeflow
 
 # Install dependencies
-npm install
+npm ci
 
 # Start development server
 npm start
